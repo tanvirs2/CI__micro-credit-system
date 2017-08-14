@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
+$config['modules_locations'] = array(
+    APPPATH.'modules/' => '../modules/',
+);
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -23,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
+$config['base_url'] = 'http://localhost/ci-micro-credit/';
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +39,7 @@ $config['base_url'] = '';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
