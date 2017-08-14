@@ -1,4 +1,4 @@
-![Alt text](/assets/app-screen.png?raw=true "Optional Title")
+![app-screen](/uploads/be29463b9df05718e951fd9cf04c549f/app-screen.png)
 
 ###################
 What is Micro-Credit
