@@ -6,16 +6,6 @@
 This is Nihal IT offical Micro-Credit Application.
 
 *******************
-**Third Party Libraries**
-
-**HTTP Request Handeler**
-
-http://guzzle.readthedocs.io/en/latest/index.html
-
-http://phphttpclient.com/
-*******************
-
-*******************
 **Release Information**
 *******************
 
