@@ -20,6 +20,7 @@ New DB Librabry Added
 
 Features:
 
+    * Auto Create Database (if not exists)
     * Auto Add Column
     * Auto Modify Column
     * Auto Rename Column
