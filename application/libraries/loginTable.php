@@ -2,54 +2,89 @@
 
 class LoginTable {
 
+    protected $ci;
+
     public function __construct($params)
     {
-        $CI =& get_instance();        
-        $CI->load->dbforge();
+        /* LOAD INSTANCE AND DBFOREGE */
+        $this->ci =& get_instance();    
+        $this->ci->load->dbforge();
+        
+        /* STORE INPUT DATA */
         $table = $params['table'][0];
         $column = $params['col'];                    
                
-        $check = $CI->db->table_exists($table);
+        /* CHECK TABLE EXISTS */
+        $check = $this->ci->db->table_exists($table);
         if(!$check):
-
+            /* WHEN TABLE NOT FOUND */
             foreach($column as $k=>$each){
                 $eachV = explode('-',$each);
                 $this->up($eachV[0],$eachV[1],$table);
             }  
-            $CI->dbforge->create_table($table);
+            $this->ci->dbforge->create_table($table);
         else:
-
-            $tableAtt = $CI->db->list_fields($table);
+            /* WHEN TABLE FOUND */
+            $count = false;          
+            $tableAtt = $this->ci->db->list_fields($table); /* LIST OF TABLE ATTRIBUTES */
+            /* EXPLOAD INPUT ATTBUTE NAME AND TYPE */
             foreach($column as $k=>$each){
-                $dbAttributes = explode('-',$each);
-                $checkEx = in_array($dbAttributes[0],$tableAtt);
-                if(!$checkEx){
-                    $keys = $k - 1;
-                    if($keys > 0){
-                        $previousColumn = explode('-', $column[$keys]);
-                        $this->columnAfter($dbAttributes[0],$dbAttributes[1],$table,$previousColumn[0]);                            
-                    }else{
-                        $this->columnAfterFirst($dbAttributes[0],$dbAttributes[1],$table);                            
+                $eachV = explode('-',$each);
+                $eachValue[] = $eachV[0];
+            } 
+
+            /* IF INPUT ATTBUTE AND DATABASE ATTRBUTE COUNT EQULE */
+            if(count($tableAtt) == count($eachValue)){
+                $count = true;
+            }           
+
+            /* FOR DROP DATABASE ATTRUBUTE */
+            if(count($tableAtt) > count($eachValue)):
+                foreach($tableAtt as $k=>$each){
+                    $checkEx = in_array($each,$eachValue);
+                    if(!$checkEx){
+                        $this->dropColumn($each, $table);
                     }
-                }
-            }                        
+                }  
+            else:
+            /* FOR MODIFY AND ALTER ATTRBUTE */
+                foreach($column as $k=>$each){
+                    $dbAttributes = explode('-',$each);
+                    $checkEx = in_array($dbAttributes[0],$tableAtt);
+                    if(!$checkEx){
+                        if($count){ /* MODIFY ATTRUBUTE */
+                            $this->columnModify($dbAttributes[0],$dbAttributes[1],$table,$tableAtt[$k]);
+                        }else{ /* ALTER AFTER NEW ATTRUBUTE */
+                            $keys = $k - 1;
+                            if($keys > 0){
+                                $previousColumn = explode('-', $column[$keys]);
+                                $this->columnAfter($dbAttributes[0],$dbAttributes[1],$table,$previousColumn[0]);                            
+                            }else{
+                                $this->columnAfterFirst($dbAttributes[0],$dbAttributes[1],$table);                            
+                            }
+                        }                    
+                    }
+                }    
+
+            endif;                      
                     
         endif;
               
     }
 
+    /* CREATE NEW TABLE AND ATTBUTES */
     public function up($param,$k,$table)
-    {     
-        $CI =& get_instance();   
-        $CI->dbforge->add_field(array(
+    {       
+        $this->ci->dbforge->add_field(array(
             $param => $this->attributeType($k)
             
         ));
         if($k == 'in'){
-            $CI->dbforge->add_key($param, TRUE);
+            $this->ci->dbforge->add_key($param, TRUE);
         }        
     }   
 
+    /* ALL ATTRUBUTES TYPES */
     public function attributeType($type)
     {
         if($type == 'in'){
@@ -61,57 +96,67 @@ class LoginTable {
         }elseif($type == 'i'){
             $var = array(
                 'type' => 'INT',
-                'constraint' => 11             
+                'constraint' => 11,
+                'null' => FALSE,          
             );
         }elseif($type == 'v'){
             $var = array(
                 'type' => 'VARCHAR',
-                'constraint' => '256'
+                'constraint' => '256',
+                'null' => FALSE
             );
         }elseif($type == 't'){
             $var = array(
-                'type' => 'TEXT'
+                'type' => 'TEXT',
+                'null' => FALSE
             );
         }
         return $var;
     }
     
+    /* ADD COLUMN AFTER PREVIOUS COLUMN */
     public function columnAfter($param,$k,$table,$column)
     {
-        $CI =& get_instance();  
-
-        $array = $this->attributeType($k);
-        foreach($array as $k=>$each) {
-			$arr[] = "'$k'".'=>'."'$each'".',';
-        }
-        $finalArr = rtrim(implode($arr),",");
-
+        $attType = $this->attributeType($k);
+        $createAtt = array_merge($attType, ['after' => $column]);
         $fields = array(
-            $param => array($finalArr, 'after' => $column)
+            $param => $createAtt
         );
-        $CI->dbforge->add_column($table, $fields);
+        $this->ci->dbforge->add_column($table, $fields);
     }
     
+    /* SET NEW COLUMN SERIAL FIRST IN TABLE */
     public function columnAfterFirst($param,$k,$table)
     {
-        $CI =& get_instance(); 
-
-        $array = $this->attributeType($k);
-        foreach($array as $k=>$each) {
-			$arr[] = "'$k'".'=>'."'$each'".',';
-        }
-        $finalArr = rtrim(implode($arr),","); 
-
+        $attType = $this->attributeType($k);
+        $createAtt = array_merge($attType, ['first' => TRUE]);
         $fields = array(
-            $param => array($finalArr, 'first' => TRUE)
+            $param => $createAtt
         );
-        $CI->dbforge->add_column($table, $fields);
+        $this->ci->dbforge->add_column($table, $fields);
     }
 
+    /* FOR TABLE COLUMN MODIFY */
+    public function columnModify($param,$k,$table,$oldCol)
+    {
+        $attType = $this->attributeType($k);
+        $createAtt = array_merge(['name' => $param], $attType);
+        $fields = array(
+            $oldCol => $createAtt
+        );
+        $this->ci->dbforge->modify_column($table, $fields);
+    }
+
+    /* FOR DROP COLUMN */
+    public function dropColumn($param,$table)
+    {
+        $this->ci->dbforge->drop_column($table, $param);
+    }
+
+    /* FOR DROP TABLE */
     public function down($table)
     {
-        $CI =& get_instance(); 
-        $CI->dbforge->drop_table($table);
+        $this->ci->dbforge->drop_table($table);
     }
 
 }

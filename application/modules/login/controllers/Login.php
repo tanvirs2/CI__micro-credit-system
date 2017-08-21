@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	Author: Nihal IT
 	Project: Micro-Credit
 	Start: August 2017 
-	Last Update: 
+	Last Update: 22-Aug
 */
 
 class Login extends MX_Controller  
@@ -23,8 +23,8 @@ class Login extends MX_Controller
 
 	public function dbLibaryFunction()
 	{
-		// Login Table
-		$params =  ['table'=>['login'], 'col'=>['datetime-v','id-in','name-v','email-v','test-i','password-v','userType-v']];		
+		// Login Table		
+		$params =  ['table'=>['login'], 'col'=>['id-in','name-v','email-v','password-v','userType-v','datetTime-v']];		
 		$this->load->library('Logintable', $params);
 	}
 }
