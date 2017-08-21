@@ -8,7 +8,7 @@ This is Nihal IT offical Micro-Credit Application.
 *******************
 **Release Information**
 
-Current Version: 1.0.1
+Current Version: ALPHA-0.1.0
 *******************
 
 **************************
