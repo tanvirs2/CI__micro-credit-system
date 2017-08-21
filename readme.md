@@ -15,12 +15,18 @@ Version: 1.0.1
 **************************
 **Changelog and New Features**
 
-** New DB Librabry Added **
+New DB Librabry Added
+
 Features:
+
     * Auto Add Column
+
     * Auto Modify Column
+
     * Auto Rename Column
+
     * Auto Drop Column
+    
     * Easy To Intregrat
 **************************
 
