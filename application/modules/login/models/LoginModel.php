@@ -1,10 +1,10 @@
 <?php
 
-class Login_model extends CI_Model {
+class LoginModel extends CI_Model {
     
     public function __construct()
     {
-            parent::__construct();
+        parent::__construct();
             // Your own constructor code
     }
     
