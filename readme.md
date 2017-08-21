@@ -31,6 +31,8 @@ Features:
 
 *******************
 **Server Requirements**
+
+PHP 5.2 > or PHP < 7
 *******************
 
 ************
