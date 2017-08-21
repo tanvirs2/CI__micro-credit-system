@@ -14,6 +14,8 @@ Current Version: ALPHA-0.1.0
 **************************
 **Changelog and New Features**
 
+------------ ALPHA-0.1.0 -------------
+
 New DB Librabry Added
 
 Features:
@@ -23,6 +25,8 @@ Features:
     * Auto Rename Column
     * Auto Drop Column
     * Easy To Intregrat
+
+------------ ALPHA-0.1.0 -------------    
 **************************
 
 *******************
