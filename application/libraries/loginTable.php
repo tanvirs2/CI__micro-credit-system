@@ -3,6 +3,7 @@
 class LoginTable {
 
     protected $ci;
+    protected $attRename = false;
 
     public function __construct($params)
     {
@@ -24,18 +25,17 @@ class LoginTable {
             }  
             $this->ci->dbforge->create_table($table);
         else:
-            /* WHEN TABLE FOUND */
-            $count = false;          
-            $tableAtt = $this->ci->db->list_fields($table); /* LIST OF TABLE ATTRIBUTES */
+            /* WHEN TABLE FOUND */         
+            $tableAtt = $this->ci->db->list_fields($table);
+            
+            /* LIST OF TABLE ATTRIBUTES */
             /* EXPLOAD INPUT ATTBUTE NAME AND TYPE */
             foreach($column as $k=>$each){
                 $eachV = explode('-',$each);
                 $eachValue[] = $eachV[0];
-            } 
-
-            /* IF INPUT ATTBUTE AND DATABASE ATTRBUTE COUNT EQULE */
-            if(count($tableAtt) == count($eachValue)){
-                $count = true;
+                if($eachV[0] !== $tableAtt[$k]){
+                    $this->attRename = true;
+                }
             }           
 
             /* FOR DROP DATABASE ATTRUBUTE */
@@ -47,26 +47,51 @@ class LoginTable {
                     }
                 }  
             else:
-            /* FOR MODIFY AND ALTER ATTRBUTE */
+            /* FOR ALTER ATTRBUTE */
+            if(count($eachValue) > count($tableAtt)){
                 foreach($column as $k=>$each){
                     $dbAttributes = explode('-',$each);
-                    $checkEx = in_array($dbAttributes[0],$tableAtt);
-                    if(!$checkEx){
-                        if($count){ /* MODIFY ATTRUBUTE */
-                            $this->columnModify($dbAttributes[0],$dbAttributes[1],$table,$tableAtt[$k]);
-                        }else{ /* ALTER AFTER NEW ATTRUBUTE */
-                            $keys = $k - 1;
-                            if($keys > 0){
-                                $previousColumn = explode('-', $column[$keys]);
-                                $this->columnAfter($dbAttributes[0],$dbAttributes[1],$table,$previousColumn[0]);                            
-                            }else{
-                                $this->columnAfterFirst($dbAttributes[0],$dbAttributes[1],$table);                            
-                            }
-                        }                    
-                    }
-                }    
+                    $combineArray = array_combine($tableAtt,$tableAtt);
+                    
+                    if(empty($combineArray[$dbAttributes[0]])){   
 
-            endif;                      
+                        $keysss = array_keys($eachValue, $dbAttributes[0]);  
+                        $keys = $keysss[0] - 1;
+                        if($keys > 0){
+                            $previousColumn = explode('-', $tableAtt[$keys]);
+                            $this->columnAfter($dbAttributes[0],$dbAttributes[1],$table,$previousColumn[0]);                            
+                        }else{
+                            $this->columnAfterFirst($dbAttributes[0],$dbAttributes[1],$table);                            
+                        }   
+                    }
+                                     
+                    
+                } 
+            }   
+
+
+            
+
+             
+
+            endif;
+
+            /* FOR MODIFY ATTRBUTE */
+            if(count($tableAtt) == count($eachValue) && $this->attRename == true){
+                //dbugd($eachValue);
+                foreach($column as $k=>$each) {
+                    $dbAttributes = explode('-',$each);
+                    /* MODIFY ATTRUBUTE */  
+                    $this->columnModify($dbAttributes[0].'s',$dbAttributes[1],$table,$tableAtt[$k]);                                                                             
+                }    
+                  
+                foreach($column as $k=>$each) {
+                    $dbAttributes = explode('-',$each);
+                    $this->columnModify($dbAttributes[0],$dbAttributes[1],$table,$dbAttributes[0].'s');   
+                } 
+            } 
+            
+           
                     
         endif;
               
