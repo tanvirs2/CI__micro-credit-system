@@ -33,7 +33,7 @@ class LoginTable {
             foreach($column as $k=>$each){
                 $eachV = explode('-',$each);
                 $eachValue[] = $eachV[0];
-                if($eachV[0] !== $tableAtt[$k]){
+                if($eachV[0] !== !empty($tableAtt[$k])){
                     $this->attRename = true;
                 }
             }           
@@ -64,34 +64,24 @@ class LoginTable {
                             $this->columnAfterFirst($dbAttributes[0],$dbAttributes[1],$table);                            
                         }   
                     }
-                                     
-                    
-                } 
-            }   
-
-
-            
-
-             
-
-            endif;
-
-            /* FOR MODIFY ATTRBUTE */
-            if(count($tableAtt) == count($eachValue) && $this->attRename == true){
-                //dbugd($eachValue);
-                foreach($column as $k=>$each) {
-                    $dbAttributes = explode('-',$each);
-                    /* MODIFY ATTRUBUTE */  
-                    $this->columnModify($dbAttributes[0].'s',$dbAttributes[1],$table,$tableAtt[$k]);                                                                             
-                }    
-                  
-                foreach($column as $k=>$each) {
-                    $dbAttributes = explode('-',$each);
-                    $this->columnModify($dbAttributes[0],$dbAttributes[1],$table,$dbAttributes[0].'s');   
                 } 
             } 
-            
-           
+            endif;
+
+        /* FOR MODIFY ATTRBUTE */
+        if(count($tableAtt) == count($eachValue) && $this->attRename == true) {
+            //dbugd($eachValue);
+            foreach($column as $k=>$each) {
+                $dbAttributes = explode('-',$each);
+                /* MODIFY ATTRUBUTE */  
+                $this->columnModify($dbAttributes[0].'s',$dbAttributes[1],$table,$tableAtt[$k]);                                                                             
+            }    
+                
+            foreach($column as $k=>$each) {
+                $dbAttributes = explode('-',$each);
+                $this->columnModify($dbAttributes[0],$dbAttributes[1],$table,$dbAttributes[0].'s');   
+            } 
+        }    
                     
         endif;
               
