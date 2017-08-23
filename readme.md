@@ -21,11 +21,16 @@ New DB Librabry Added
 Features:
 
     * Auto Create Database (if not exists)
+    * Auto Load Library
+    * Auto Check Table Exist
+    * Auto Create Table
+    * Auto Drop Table
     * Auto Add Column
     * Auto Modify Column
     * Auto Rename Column
     * Auto Drop Column
     * Easy To Intregrat
+    * Easy To Manupulate
 
 ------------ ALPHA-0.1.0 -------------    
 **************************

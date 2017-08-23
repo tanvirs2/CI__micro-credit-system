@@ -55,7 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 // Rubel Routel
-
+$route['nihalit/system-update'] = 'systemUpdate';
 
 
 // Default Routes
