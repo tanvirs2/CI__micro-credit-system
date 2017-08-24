@@ -29,11 +29,15 @@ class LoginTable {
 
         
         /* START LOOF FOR EVERY TABLE ACTION */
-        foreach ($params as $tableName => $tableColumn):
+        foreach ($params as $tableName => $columnAndSeeds):
 
             /* STORE INPUT DATA */
             $table  = $tableName;
-            $column = $tableColumn;           
+            $column = $columnAndSeeds[0];
+            if(!empty($columnAndSeeds[1])) 
+            {
+                $seeds  = $columnAndSeeds[1];                    
+            }               
 
             /* LIST OF TABLE ATTRIBUTES */
             /* EXPLOAD INPUT ATTBUTE NAME AND TYPE */
@@ -57,7 +61,7 @@ class LoginTable {
                 {
                     $this->attRename = true;
                 }
-            }  
+            }             
             
             /* CHECK TABLE EXISTS */
             $check = $this->ci->db->table_exists($table);
@@ -69,8 +73,24 @@ class LoginTable {
                 {
                     $eachV = explode('-',$each);
                     $this->up($eachV[0],$eachV[1],$table);
-                }  
+                }
                 $this->ci->dbforge->create_table($table);
+
+                /* SEEDS DATA TO TABLE */
+                if(!empty($seeds))
+                {
+                    $replate = [" ","'","(","),",");"];
+                    foreach($seeds as $seedKey=>$eachSeedRow)
+                    {
+                        $exploadSeedRow[$seedKey] = explode(',',str_replace($replate,'',$eachSeedRow));
+                        foreach($exploadSeedRow[$seedKey] as $exploadSeedRowKey=>$exploadSeedRowValue)
+                        {
+                            $eachRowValue[$eachValue[$exploadSeedRowKey]] = $exploadSeedRowValue; 
+                            $newExploadSeedRow[$seedKey][$eachValue[$exploadSeedRowKey]] = $eachRowValue[$eachValue[$exploadSeedRowKey]];
+                        }                  
+                    }
+                    $this->ci->db->insert_batch($table, $newExploadSeedRow);
+                }
             } else {
                 /* WHEN TABLE FOUND */         
                 $tableAtt = $this->ci->db->list_fields($table);      

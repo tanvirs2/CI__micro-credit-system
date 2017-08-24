@@ -23,6 +23,7 @@ Features:
     * Auto Create Database (if not exists)
     * Auto Load Library
     * Auto Check Table Exist
+    * Auto Seed In New Table
     * Auto Create Table
     * Auto Drop Table
     * Auto Add Column

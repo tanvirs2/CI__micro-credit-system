@@ -35,10 +35,14 @@ class DbAutoload {
                 $fileContents[] = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             }
 
+            $output = array_slice($fileContents[0], 2);
+            
             foreach ($fileContents as $key => $value) 
             {            
-                $attribute[$value[0]] = explode(',',$value[1]);            
+                $seed = array_slice($value, 2);
+                $attribute[$value[0]] = [explode(',',$value[1]), $seed];            
             }   
+            
 
             $this->ci->load->library('logintable', $attribute);
             /* SHOW MESSAGE COMPLETE UPDATE PROCESS */            
