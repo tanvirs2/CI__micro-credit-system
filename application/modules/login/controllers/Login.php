@@ -14,7 +14,7 @@ class Login extends MX_Controller
 	public function __construct()
 	{			
 		//$this->dbLibaryFunction();
-	}	
+	}
 
 	public function index()
 	{
@@ -26,7 +26,15 @@ class Login extends MX_Controller
 		$data = $this->input->post();
 		$this->load->model('loginModel');
 		$data = $this->loginModel->checkUserInfo($data);
-		dbugd($data);
+		if(empty($data))
+		{
+			$this->session->set_flashdata('error', 'Please input valid email & password.');
+			redirect(base_url());
+		} else {
+			$_SESSION['userInfo'] = $data[0];
+			redirect(base_url('dashboard'));
+		}
+		
 	}
 
 	public function dbLibaryFunction()

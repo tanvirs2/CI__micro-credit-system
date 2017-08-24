@@ -16,6 +16,10 @@ Current Version: ALPHA-0.1.0
 
 ------------ ALPHA-0.1.0 -------------
 
+Login Check Complete
+
+Mastering Complete
+
 New DB Librabry Added
 
 Features:
