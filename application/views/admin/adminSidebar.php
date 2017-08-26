@@ -35,26 +35,6 @@
                 <h3 class="uppercase">Features</h3>
             </li>
 
-
-            <?php 
-                $path = "application/modules/";
-                $files = directory_map($path);
-
-                $files = str_replace('\\','',array_keys($files));
-                //dbugd($files);
-
-                if(!empty($files))
-                {
-                    foreach($files as $each)
-                    {                        
-                        $this->load->view($each.'Nav','',TRUE);                        
-                    }
-                        
-                }
-             ?>
-
-
-
             <li class="nav-item  ">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-diamond"></i>
