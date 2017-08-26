@@ -6,13 +6,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	Author: Nihal IT
 	Project: Micro-Credit
 	Start: August 2017 
-	Last Update: 23-Aug
+	Last Update: 26-Aug
 */
 
 class Login extends MX_Controller  
 {
 	public function __construct()
-	{			
+	{		
+		if(!empty($_SESSION['userInfo']))
+		{			
+			redirect('dashboard');
+		}	
 		//$this->dbLibaryFunction();
 	}
 

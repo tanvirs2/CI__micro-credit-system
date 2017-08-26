@@ -19,5 +19,18 @@
 <link href="assets/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css" />
 <link href="assets/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color" />
 <link href="assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="assets/favicon.ico" />
 <!-- END THEME LAYOUT STYLES -->
-<link rel="shortcut icon" href="favicon.ico" /> </head>
+<?php
+
+$path = "assets/modulesStyle/".$this->router->fetch_module().'/css';
+$files = directory_map($path);
+if(!empty($files))
+{
+    foreach ($files as $key => $value) 
+    {
+            echo '<link href="'."assets/modulesStyle/".$this->router->fetch_module().'/css/'.$value.'" rel="stylesheet" type="text/css" />';        
+    }
+}
+
+?>

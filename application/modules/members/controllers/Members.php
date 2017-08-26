@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	Last Update: 26-Aug
 */
 
-class Dashboard extends MX_Controller  
+class Members extends MX_Controller  
 {
     public function __construct()
 	{			
@@ -19,15 +19,12 @@ class Dashboard extends MX_Controller
 			redirect(base_url());
 		}	
     }
-    
+
+
     public function index() 
 	{
-        $data['title'] = 'Dashboard';
-        $data['allContents'] = $this->load->view('dashboardContent','',true); 
-
-       
-        //dbugd($info);
-
+        $data['title'] = 'Members';
+        $data['allContents'] = $this->load->view('membersContent','',true);      
 		$this->loadAllContent($data);	
     }    
 

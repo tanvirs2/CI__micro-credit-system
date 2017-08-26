@@ -50,6 +50,18 @@
 <script src="assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
 <script src="assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
 <!-- END THEME LAYOUT SCRIPTS -->
+
+<?php
+$path = "assets/modulesStyle/".$this->router->fetch_module().'/js';
+$files = directory_map($path);
+if(!empty($files))
+{
+    foreach ($files as $key => $value) 
+    {
+            echo '<script src="'."assets/modulesStyle/".$this->router->fetch_module().'/js/'.$value.'" type="text/javascript"></script>';        
+    }
+}
+?>
 <script>
     $(document).ready(function()
     {

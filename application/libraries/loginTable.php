@@ -34,11 +34,9 @@ class LoginTable {
             /* STORE INPUT DATA */
             $table  = $tableName;
             $column = $columnAndSeeds[0];
-            if(!empty($columnAndSeeds[1])) 
-            {
-                $seeds  = $columnAndSeeds[1];                    
-            }               
-
+            $seeds  = $columnAndSeeds[1];                    
+                    
+       
             /* LIST OF TABLE ATTRIBUTES */
             /* EXPLOAD INPUT ATTBUTE NAME AND TYPE */
             foreach($column as $k=>$each)
@@ -75,7 +73,7 @@ class LoginTable {
                     $this->up($eachV[0],$eachV[1],$table);
                 }
                 $this->ci->dbforge->create_table($table);
-
+                
                 /* SEEDS DATA TO TABLE */
                 if(!empty($seeds))
                 {

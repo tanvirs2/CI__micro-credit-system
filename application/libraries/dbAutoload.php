@@ -41,8 +41,7 @@ class DbAutoload {
             {            
                 $seed = array_slice($value, 2);
                 $attribute[$value[0]] = [explode(',',$value[1]), $seed];            
-            }   
-            
+            }                       
 
             $this->ci->load->library('logintable', $attribute);
             /* SHOW MESSAGE COMPLETE UPDATE PROCESS */            
