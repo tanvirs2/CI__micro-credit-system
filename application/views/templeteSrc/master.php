@@ -6,7 +6,6 @@
 	<!--<![endif]-->
 	<!-- BEGIN HEAD -->
 	<head>
-		<base url="<?php echo base_url();?>" />
 		<meta charset="utf-8" />
 		<title><?php echo !empty($title)?$title:'Title';?></title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,19 +41,12 @@
 										<i class="fa fa-circle"></i>
 									</li>
 									<li>
-										<span>Dashboard</span>
+										<span><?php echo !empty($title)?$title:'Title';?></span>
 									</li>
 								</ul>
-								<div class="page-toolbar">
-									<div id="dashboard-report-range" class="pull-right tooltips btn btn-sm" data-container="body" data-placement="bottom" data-original-title="Change dashboard date range">
-										<i class="icon-calendar"></i>&nbsp;
-										<span class="thin uppercase hidden-xs"></span>&nbsp;
-										<i class="fa fa-angle-down"></i>
-									</div>
-								</div>
 							</div>
 							<!-- END PAGE BAR -->
-							<?php echo $allContents; ?>
+							<?php echo $contents; ?>
 							
 						</div>
 						<!-- END CONTENT BODY -->

@@ -1,5 +1,15 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
+/* !!!!!!!!!!!!!!!! CURRENTLY NOT USING THIS LIBRARY !!!!!!!!!!!!!! */
+
+/* ---------- DOCUMENTATION --------  */
+/* THIS LIBRARY IS USING FOR CREATE FOLDER LIKE:
+    assets/moduleStyle/eachModule/
+    assets/moduleStyle/eachModule/css
+    assets/moduleStyle/eachModule/js
+IT DEPENDS ON MODULES
+IF NEW MODULE CREATE THAT LIBRARY WILL CREATE NEW FOLDER FOR THIS NEW MODULE */
+
 class AutoCreateModulesStyle {
 
     protected $ci;

@@ -9,31 +9,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	Last Update: 27-Aug
 */
 
-class Dashboard extends MX_Controller  
+class ModuleName extends MX_Controller  
 {
-
     protected $uType;
-
+    
     public function __construct()
-	{			
+    {			
         $this->checkSession();
         $this->uType = returnUserType($_SESSION['userInfo']['userType']);
-    }
-    
-    public function index() 
-	{
-        $this->activeMenu('Dashboard');
-        $data = ['Dashboard','content','']; /* P1=TITLE|P2=PAGENAME|P3=PARAMITER */
-		$this->loadAllContent($data);	
     }    
 
-
-
-
-
-
-
-
+    public function index() 
+	{
+        $this->activeMenu('menu name');
+        $data = ['title','pagename','extra conent']; /* P1=TITLE|P2=PAGENAME|P3=PARAMITER */
+		$this->loadAllContent($data);	
+    }      
 
 
 
@@ -61,7 +52,7 @@ class Dashboard extends MX_Controller
 
     public function loadAllContent($dynamicContent)
     {
-        /* START---LOAD DYNAMIC CONTENT */
+        /* LOAD DYNAMIC CONTENT */
         $data['title'] = $dynamicContent[0];
         $data['contents'] = $this->load->view($this->uType.'/'.$dynamicContent[1],$dynamicContent[2],true);
         /* LOAD TEMPLATE MAIN CONTENT */

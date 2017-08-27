@@ -18,6 +18,6 @@ class SystemUpdate extends MX_Controller
 	
 	public function index()
 	{
-		$this->load->view('systemUpdate');
+		//$this->load->view('systemUpdate');
 	}
 }

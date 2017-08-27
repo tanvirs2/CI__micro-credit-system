@@ -13,7 +13,10 @@ class Logout extends MX_Controller
 {
 	public function __construct()
 	{	
-
+        if(empty($_SESSION['userInfo']))
+		{			
+			redirect(base_url());
+		}	
     }
 
     public function index()

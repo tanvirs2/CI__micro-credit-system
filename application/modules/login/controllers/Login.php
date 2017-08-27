@@ -17,6 +17,7 @@ class Login extends MX_Controller
 		{			
 			redirect('dashboard');
 		}	
+		/* example use this library each module controller */
 		//$this->dbLibaryFunction();
 	}
 
