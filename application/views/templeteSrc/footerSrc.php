@@ -22,15 +22,15 @@
 
 <!-- START----DYNAMIC GET JS FILE FOR EACH USER -->
 <?php
-    $path = APPPATH.'modules/';
+    /* $path = APPPATH.'modules/';
     $files = directory_map($path);
     $allModules = str_replace('\\','',array_keys($files));
     $code = '';
-    foreach ($allModules as $key => $each) {
-        $path = APPPATH.'modules/'.$each.'/views/'.$userType.'/src/jsComponent.php';                        
+    foreach ($allModules as $key => $each) { */
+        $path = APPPATH.'modules/'.$_SESSION['menuOpen'].'/views/'.$userType.'/src/jsComponent.php';                        
         if (is_file($path)) {
             include_once($path);   
         }                    
-    }
+    //}
 ?>
 <!-- END----DYNAMIC GET JS FILE FOR EACH USER -->

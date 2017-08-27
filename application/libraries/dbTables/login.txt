@@ -1,6 +1,6 @@
 login
 id-in,name-v,email-v,password-v,userType-v,dateTime-v
 
-1,Rubel,dpirubel@gmail.com,rubel123,3,2017-08-23
-2,RotonVai,vai@gmail.com,roton123,1,2017-08-23
-3,Tanvir,tanvir@gmail.com,tanvir,2,2017-08-23
+1,Rubel,a@a.com,123,1,2017-08-23
+2,RotonVai,vai@gmail.com,roton123,2,2017-08-23
+3,Tanvir,tanvir@gmail.com,tanvir,3,2017-08-23
