@@ -21,17 +21,17 @@ class Users extends MX_Controller
 
     public function index() 
 	{
-        $this->activeMenu('Add Users');
+        $this->activeMenu('Add Members');
         $data = ['Members','content','']; /* P1=TITLE|P2=PAGENAME|P3=PARAMITER */
 		$this->loadAllContent($data);	
-    }      
+    }
     
-    public function test() 
+    public function memberList() 
     {
-        $this->activeMenu('Test');
-        $data = ['Test','test','']; 
+        $this->activeMenu('Member List');
+        $data = ['Member List','memberList','']; 
 		$this->loadAllContent($data);	
-    }   
+    }
 
 
 

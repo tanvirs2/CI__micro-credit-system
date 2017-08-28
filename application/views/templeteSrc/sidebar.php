@@ -18,7 +18,7 @@
                         $path = APPPATH.'modules/'.$each.'/views/'.$userType.'/nav_'.$k.'.php';                        
                         if (is_file($path)) {
                             ob_start();
-                                include($path);  
+                                include_once($path);  
                             $code[$k] = ob_get_clean();                             
                         }
                     }                    

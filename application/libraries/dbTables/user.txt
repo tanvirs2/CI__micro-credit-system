@@ -1,2 +1,0 @@
-user
-id-in,name-v,email-v,phone-v,address-v

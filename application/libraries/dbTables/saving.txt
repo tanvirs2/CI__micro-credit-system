@@ -1,2 +1,0 @@
-saving
-id-in,userId-i,savingAmount-i,dateIssue-v,status-i
