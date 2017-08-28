@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	Last Update: 27-Aug
 */
 
-class Members extends MX_Controller  
+class Users extends MX_Controller  
 {
     protected $uType;
     
@@ -21,7 +21,7 @@ class Members extends MX_Controller
 
     public function index() 
 	{
-        $this->activeMenu('Add Member');
+        $this->activeMenu('Add Users');
         $data = ['Members','content','']; /* P1=TITLE|P2=PAGENAME|P3=PARAMITER */
 		$this->loadAllContent($data);	
     }      

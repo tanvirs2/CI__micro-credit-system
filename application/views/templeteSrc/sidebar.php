@@ -17,7 +17,9 @@
                     for($k = 1; $k <= count($allModules); $k++) {
                         $path = APPPATH.'modules/'.$each.'/views/'.$userType.'/nav_'.$k.'.php';                        
                         if (is_file($path)) {
-                            $code[$k] = file_get_contents($path);                               
+                            ob_start();
+                                include($path);  
+                            $code[$k] = ob_get_clean();                             
                         }
                     }                    
                 }
