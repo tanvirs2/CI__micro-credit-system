@@ -14,9 +14,11 @@ class Users extends MX_Controller
     protected $uType;
     
     public function __construct()
-    {			
+    {	
+        		
         $this->checkSession();
         $this->uType = returnUserType($_SESSION['userInfo']['userType']);
+        $this->load->model('UsersModel');        
     }    
 
     public function index() 
@@ -27,8 +29,39 @@ class Users extends MX_Controller
     }
 
     public function addMember() 
-    {
-        echo true;
+    {        
+    
+        $post = $this->input->post();
+        $fileInfoult = $this->validationCheck($post);
+        if($fileInfoult){
+            /* LOAD FILE UPLOAD LIBRARY */
+            $data = ['folder'=>'members','size'=>100,'width'=>300,'height'=>300];
+            $config = $this->fileConfig($data);    
+            $this->load->library('upload', $config);
+            /* CHECK FILE ERROR WITH GIVEN CONFIG */    
+            if ( ! $this->upload->do_upload('memImg')) {
+                $error = array('error' => $this->upload->display_errors());
+                //echo 'file upload error';
+                echo false;
+            } else {
+                
+                $fileInfo = $this->upload->data();                
+                $insertId = $this->UsersModel->addMember($post);
+                if($fileInfoult){
+                    $this->renameFile($fileInfo, 'member'.$insertId); 
+                    //echo 'data inserted success.';
+                    echo true;
+                } else {
+                    //echo 'data insert false';
+                    echo false;
+                }                           
+            }        
+
+        } else {
+            //echo 'validation false';
+            echo false;
+        }
+        
     }
     
     public function memberList() 
@@ -37,6 +70,45 @@ class Users extends MX_Controller
         $data = ['Member List','memberList','']; 
         $this->loadAllContent($data);	
     }
+
+
+    public function validationCheck($postData) 
+    {
+        $this->load->helper('form');        
+        $this->load->library('form_validation');
+
+        foreach($postData as $k => $each) {
+            $this->form_validation->set_rules($k, 'Field', 'required');
+        }
+        if ($this->form_validation->run() == FALSE) {
+                return false;
+        } else {
+                return true;
+        }        
+    }
+
+    public function renameFile($fileInfo,$insertId) 
+    {
+        $file_path     = $fileInfo['file_path'];
+        $file          = $fileInfo['full_path'];
+        $file_ext      = $fileInfo['file_ext'];            
+        $final_file_name = $insertId.$file_ext;   
+        
+        // here is the renaming functon
+        rename($file, $file_path . $final_file_name);
+    }
+
+
+    public function fileConfig($data) 
+    {
+        $config['upload_path']          = './uploads/'.$data['folder'];
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = $data['size'];
+        $config['max_width']            = $data['width'];
+        $config['max_height']           = $data['height'];
+        return $config;
+    }
+    
 
     
 

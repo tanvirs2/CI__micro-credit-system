@@ -30,15 +30,15 @@ class LoginTable {
         
         /* START LOOF FOR EVERY TABLE ACTION */
         foreach ($params as $tableName => $columnAndSeeds):
-
+            
             /* STORE INPUT DATA */
             $table  = $tableName;
             $column = $columnAndSeeds[0];
             $seeds  = $columnAndSeeds[1];                    
                     
-       
             /* LIST OF TABLE ATTRIBUTES */
             /* EXPLOAD INPUT ATTBUTE NAME AND TYPE */
+            $eachValue = [];
             foreach($column as $k=>$each)
             {
                 $eachV = explode('-',$each);
@@ -59,7 +59,7 @@ class LoginTable {
                 {
                     $this->attRename = true;
                 }
-            }             
+            }       
             
             /* CHECK TABLE EXISTS */
             $check = $this->ci->db->table_exists($table);

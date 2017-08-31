@@ -51,11 +51,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 // Tanvir Routes
-
+include('dev1.php');
 
 
 // Rubel Routel
-$route['nihalit/system-update'] = 'systemUpdate';
+include('dev2.php');
 
 
 // Default Routes

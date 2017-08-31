@@ -9,23 +9,49 @@
 <!-- AJAX FORM SUBMIT PLUGIN -->
 <script src="http://malsup.github.com/jquery.form.js"></script> 
 
-<script> 
+<script>
+
+    $("#membersForm").validate({
+        errorClass: "error-lavel",
+    });
     
+    $(document).ajaxStart( function() {  
+        $("img#memberLoader").removeClass("display-hide"); 
+    }).ajaxStop ( function(){ 
+        setTimeout(function () {
+            $("img#memberLoader").addClass("display-hide");
+            $("html, body").animate({scrollTop: 0});
+        }, 2000);       
+    });
+
+    function fadeOutFunc(value, val, time){
+        
+        setTimeout(function () {
+            $(value).fadeOut('slow', function(){
+                $(this).val('display-hide');
+            });
+        }, time); 
+    }
 
     $(document).ready(function() { 
-        $("#uu").click(function(){
-            $('#membersForm').ajaxSubmit({           
+        //$("#memberAdd").click(function(e){
+            $('#membersForm').ajaxForm({                    
             
                 success: function (data){
-                    if(!data){
-                        alert('error');
+                    if(!data){    
+                        $('div#successMsg').addClass('display-hide');
+                        $('div#errorMsg').removeClass('display-hide');
+                        //fadeOutFunc('div#errorMsg','addClass',4000);
                     }else{
-                        alert('success');
+                        $('div#errorMsg').addClass('display-hide');
+                        $('div#successMsg').removeClass("display-hide");
+                        //fadeOutFunc('div#successMsg','addClass',4000);
+                        $('#membersForm').resetForm();
                     }
                     
                 }
             });
-        });
+        //});
     }); 
 
     

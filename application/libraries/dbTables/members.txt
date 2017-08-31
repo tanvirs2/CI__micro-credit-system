@@ -1,2 +1,2 @@
 members
-memId-in,memName-v,memEmail-v,memPass-v,memPhn-v,memDOB-v,memPRaddrrs-v,memPEaddrrs-v,memNID-v,acType-i,memFO-v,memJnDate-v,memImg-v
+memId-in,memName-v,memEmail-v,memPass-v,memPhn-v,memDOB-v,memPRaddrrs-v,memPEaddrrs-v,memNID-v,acType-i,memFO-v,memJnDate-v

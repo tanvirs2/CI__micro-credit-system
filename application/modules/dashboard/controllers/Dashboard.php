@@ -24,9 +24,11 @@ class Dashboard extends MX_Controller
 	{
         $this->activeMenu('Dashboard');
         $data = ['Dashboard','content','']; /* P1=TITLE|P2=PAGENAME|P3=PARAMITER */
-		$this->loadAllContent($data);	
-    }    
-
+        $this->loadAllContent($data);          
+    }  
+    
+   
+    
 
 
 

@@ -4,42 +4,41 @@
 		<div class="portlet light portlet-fit portlet-form bordered">
 			<div class="portlet-title">
 
-
 				<div class="portlet-body">
 					<!-- BEGIN FORM-->
-					<form action="<?php echo base_url('users/addMember');?>" method="post" class="form-horizontal" id="membersForm">
+					<form action="<?php echo base_url('users/addMember');?>" method="post" class="form-horizontal" id="membersForm" enctype="multipart/form-data">
 						<div class="form-body">
-							<div class="alert alert-danger display-hide">
+							<div class="alert alert-danger display-hide" id="errorMsg">
 								<button class="close" data-close="alert"></button> You have some form errors. Please check below. </div>
-							<div class="alert alert-success display-hide">
-								<button class="close" data-close="alert"></button> Your form validation is successful! </div>
+							<div class="alert alert-success display-hide" id="successMsg">
+								<button class="close" data-close="alert"></button> Your form data submission is successful! </div>
 							<div class="form-group">
 								<label class="control-label col-md-3">Name
                                     <span class="required"> * </span>
                                 </label>
 								<div class="col-md-4">
-									<input type="text" name="memName" class="form-control" /> </div>
+									<input type="text" name="memName" class="form-control" required /> </div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-md-3">Email
                                     <span class="required"> * </span>
                                 </label>
 								<div class="col-md-4">
-									<input type="text" name="memEmail" class="form-control" /> </div>
+									<input type="text" name="memEmail" class="form-control" required /> </div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-md-3">Phone
                                             <span class="required"> * </span>
                                         </label>
 								<div class="col-md-4">
-									<input type="text" name="memPhn" class="form-control" /> </div>
+									<input type="text" name="memPhn" class="form-control" required /> </div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-md-3">Date of Birth
                                     <span class="required"> * </span>
                                 </label>
 								<div class="col-md-4">
-									<input type="text" class="date-picker form-control" name="memDOB" data-date-format="yyyy/mm/dd" readonly/>
+									<input type="text" class="date-picker form-control" name="memDOB" data-date-format="yyyy/mm/dd" required readonly/>
 								</div>
 							</div>
 							<div class="form-group">
@@ -47,7 +46,7 @@
                                                     <span class="required"> * </span>
                                                 </label>
 								<div class="col-md-4">
-									<input name="memPRaddrss" type="text" class="form-control" />
+									<input name="memPRaddrrs" type="text" class="form-control" required />
 								</div>
 							</div>
 							<div class="form-group">
@@ -55,7 +54,7 @@
                                                     <span class="required"> * </span>
                                                 </label>
 								<div class="col-md-4">
-									<input name="memPEaddrss" type="text" class="form-control" />
+									<input name="memPEaddrrs" type="text" class="form-control" required />
 								</div>
 							</div>
 							<div class="form-group">
@@ -63,7 +62,21 @@
                                                     <span class="required"> * </span>
                                                 </label>
 								<div class="col-md-4">
-									<input name="memNID" type="number" class="form-control" />
+									<input name="memNID" type="number" class="form-control" required />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-3">Account Type
+                                                    <span class="required"> * </span>
+                                                </label>
+								<div class="col-md-4">
+									<select class="form-control" name="acType" required>
+										<option value="">Select...</option>
+										<option value="11">Category 1</option>
+										<option value="2">Category 2</option>
+										<option value="3">Category 5</option>
+										<option value="4">Category 4</option>
+									</select>
 								</div>
 							</div>
 							<div class="form-group">
@@ -71,13 +84,13 @@
                                                     <span class="required"> * </span>
                                                 </label>
 								<div class="col-md-4">
-									<select class="form-control" name="memFO">
-                                                        <option value="">Select...</option>
-                                                        <option value="Category 1">Category 1</option>
-                                                        <option value="Category 2">Category 2</option>
-                                                        <option value="Category 3">Category 5</option>
-                                                        <option value="Category 4">Category 4</option>
-                                                    </select>
+									<select class="form-control" name="memFO" required>
+										<option value="">Select...</option>
+										<option value="Category 1">Category 1</option>
+										<option value="Category 2">Category 2</option>
+										<option value="Category 3">Category 5</option>
+										<option value="Category 4">Category 4</option>
+									</select>
 								</div>
 							</div>
 							<div class="form-group">
@@ -85,7 +98,7 @@
                                                     <span class="required"> * </span>
                                                 </label>
 								<div class="col-md-4">
-									<input type="text" class="date-picker form-control" name="memJnDate" data-date-format="yyyy/mm/dd" readonly/>
+									<input type="text" class="date-picker form-control" name="memJnDate" data-date-format="yyyy/mm/dd" required readonly/>
 								</div>
 							</div>
 							<div class="form-group">
@@ -93,7 +106,7 @@
                                                     <span class="required"> * </span>
                                                 </label>
 								<div class="col-md-4">
-									<input name="memPass" type="password" class="form-control" />
+									<input name="memPass" type="password" class="form-control" required />
 								</div>
 							</div>
 							<div class="form-group last">
@@ -107,7 +120,7 @@
 											<span class="btn default btn-file">
                                                 <span class="fileinput-new"> Select image </span>
 											<span class="fileinput-exists"> Change </span>
-											<input type="file" name="memImg"> </span>
+											<input type="file" name="memImg" required /> </span>
 											<a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Remove </a>
 										</div>
 									</div>
@@ -118,8 +131,11 @@
 
 							<div class="form-actions">
 								<div class="row">
-									<div class="col-md-offset-3 col-md-9">
-										<button type="button" id='uu' class="btn green">Submit</button>
+									<div class="col-md-offset-1 col-md-2">
+										<?php echo preLoader('memberLoader'); ?>
+									</div>
+									<div class="col-md-7">
+										<button type="submit" id='memberAdd' class="btn green">Submit</button>
 										<button type="button" class="btn grey-salsa btn-outline">Cancel</button>
 									</div>
 								</div>
