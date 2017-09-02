@@ -8,44 +8,44 @@
 					<!-- BEGIN FORM-->
 					<form action="<?php echo base_url('users/addMember');?>" method="post" class="form-horizontal" id="membersForm" enctype="multipart/form-data">
 						<div class="form-body">
-							<div class="alert alert-danger display-hide" id="errorMsg">
-								<button class="close" data-close="alert"></button> You have some form errors. Please check below. </div>
-							<div class="alert alert-success display-hide" id="successMsg">
-								<button class="close" data-close="alert"></button> Your form data submission is successful! </div>
+						
+							<div class="alert alert-danger display-hide" id="errorMsg"></div>
+							<div class="alert alert-success display-hide" id="successMsg"></div>
+
 							<div class="form-group">
 								<label class="control-label col-md-3">Name
                                     <span class="required"> * </span>
                                 </label>
-								<div class="col-md-4">
+								<div class="col-md-5">
 									<input type="text" name="memName" class="form-control" required /> </div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-md-3">Email
                                     <span class="required"> * </span>
                                 </label>
-								<div class="col-md-4">
+								<div class="col-md-5">
 									<input type="text" name="memEmail" class="form-control" required /> </div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-md-3">Phone
                                             <span class="required"> * </span>
                                         </label>
-								<div class="col-md-4">
+								<div class="col-md-5">
 									<input type="text" name="memPhn" class="form-control" required /> </div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-md-3">Date of Birth
                                     <span class="required"> * </span>
                                 </label>
-								<div class="col-md-4">
-									<input type="text" class="date-picker form-control" name="memDOB" data-date-format="yyyy/mm/dd" required readonly/>
+								<div class="col-md-5">
+									<input type="text" class="date-picker form-control" name="memDOB" data-date-format="yyyy-mm-dd" required readonly/>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-md-3">Present Address
                                                     <span class="required"> * </span>
                                                 </label>
-								<div class="col-md-4">
+								<div class="col-md-5">
 									<input name="memPRaddrrs" type="text" class="form-control" required />
 								</div>
 							</div>
@@ -53,7 +53,7 @@
 								<label class="control-label col-md-3">Permanent Address
                                                     <span class="required"> * </span>
                                                 </label>
-								<div class="col-md-4">
+								<div class="col-md-5">
 									<input name="memPEaddrrs" type="text" class="form-control" required />
 								</div>
 							</div>
@@ -61,7 +61,7 @@
 								<label class="control-label col-md-3">NID Number
                                                     <span class="required"> * </span>
                                                 </label>
-								<div class="col-md-4">
+								<div class="col-md-5">
 									<input name="memNID" type="number" class="form-control" required />
 								</div>
 							</div>
@@ -69,7 +69,7 @@
 								<label class="control-label col-md-3">Account Type
                                                     <span class="required"> * </span>
                                                 </label>
-								<div class="col-md-4">
+								<div class="col-md-5">
 									<select class="form-control" name="acType" required>
 										<option value="">Select...</option>
 										<option value="11">Category 1</option>
@@ -83,7 +83,7 @@
 								<label class="control-label col-md-3">Field Officer
                                                     <span class="required"> * </span>
                                                 </label>
-								<div class="col-md-4">
+								<div class="col-md-5">
 									<select class="form-control" name="memFO" required>
 										<option value="">Select...</option>
 										<option value="Category 1">Category 1</option>
@@ -97,15 +97,15 @@
 								<label class="control-label col-md-3">Join Date
                                                     <span class="required"> * </span>
                                                 </label>
-								<div class="col-md-4">
-									<input type="text" class="date-picker form-control" name="memJnDate" data-date-format="yyyy/mm/dd" required readonly/>
+								<div class="col-md-5">
+									<input type="text" class="date-picker form-control" name="memJnDate" data-date-format="yyyy-mm-dd" required readonly/>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-md-3">Password
                                                     <span class="required"> * </span>
                                                 </label>
-								<div class="col-md-4">
+								<div class="col-md-5">
 									<input name="memPass" type="password" class="form-control" required />
 								</div>
 							</div>
@@ -125,7 +125,7 @@
 										</div>
 									</div>
 									<div class="clearfix margin-top-10">
-										<span class="label label-danger">NOTE!</span> Image Size Must W132 X H170</div>
+										<span class="label label-danger">NOTE!</span> Image Size Must W132 X H170 And only JPG format.</div>
 								</div>
 							</div>
 

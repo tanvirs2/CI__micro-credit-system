@@ -41,25 +41,21 @@ class Users extends MX_Controller
             /* CHECK FILE ERROR WITH GIVEN CONFIG */    
             if ( ! $this->upload->do_upload('memImg')) {
                 $error = array('error' => $this->upload->display_errors());
-                //echo 'file upload error';
-                echo false;
-            } else {
-                
+                $this->jsonMsgReturn(false,'File must below 100KB and Size: W132 X H170.And Only JPG Format.');
+
+            } else {                
                 $fileInfo = $this->upload->data();                
                 $insertId = $this->UsersModel->addMember($post);
                 if($fileInfoult){
                     $this->renameFile($fileInfo, 'member'.$insertId); 
-                    //echo 'data inserted success.';
-                    echo true;
-                } else {
-                    //echo 'data insert false';
-                    echo false;
+                    $this->jsonMsgReturn(true,'Data inserted success.');                  
+                } else {;
+                    $this->jsonMsgReturn(false,'Data insert error.');
                 }                           
             }        
 
         } else {
-            //echo 'validation false';
-            echo false;
+            $this->jsonMsgReturn(false, 'Please fillup all mendatory field.');
         }
         
     }
@@ -102,11 +98,16 @@ class Users extends MX_Controller
     public function fileConfig($data) 
     {
         $config['upload_path']          = './uploads/'.$data['folder'];
-        $config['allowed_types']        = 'gif|jpg|png';
+        $config['allowed_types']        = 'jpg';
         $config['max_size']             = $data['size'];
         $config['max_width']            = $data['width'];
         $config['max_height']           = $data['height'];
         return $config;
+    }
+
+    public function jsonMsgReturn($type, $msg) 
+    {
+        echo json_encode(['type'=>$type,'msg'=>$msg]);
     }
     
 
