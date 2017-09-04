@@ -4,6 +4,10 @@
 <script src="<?php echo base_url();?>assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/pages/scripts/table-datatables-buttons.min.js" type="text/javascript"></script>
 
+<!-- BOOTSTRAP CONFIRMATION -->
+<script src="<?php echo base_url();?>assets/global/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js" type="text/javascript"></script>
+<script src="<?php echo base_url();?>assets/pages/scripts/ui-confirmations.min.js" type="text/javascript"></script>
+
 <!-- FOR FORM VALIDATION -->
 <script src="<?php echo base_url();?>assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
@@ -17,11 +21,12 @@
 
 <script>
 
-
+    /* VALIDATION SPAN COLOR CLASS */
     $("#membersForm").validate({
         errorClass: "error-lavel",
     });
     
+    /* SHOW/HIDE DIV AFTER AJAX CALL */
     $(document).ajaxStart( function() {  
         $("img#memberLoader").removeClass("display-hide"); 
     }).ajaxStop ( function(){ 
@@ -31,12 +36,40 @@
         }, 2000);       
     });
 
-    function appendData(div,msg){
+    /* SHOW SUCCESS/ERROR MESSAGE */
+    function appendData(div,msg){       
         $('div#'+div).css({ display: "block" });
-        $('div#'+div).text(msg)
+        $('div#'+div).text(msg);
+        setTimeout(function() { 
+            $('div#'+div).css({ display: "none" }); 
+        }, 3000);        
     }
 
+
     $(document).ready(function() { 
+
+        /* DELETE MEMBER */
+        var last_clicked_id = null;
+        $('.confirmation_but').click(function () {
+            last_clicked_id = $(this).data("id");
+        });
+        $('.confirmation_but').confirmation({
+            onConfirm: function () {
+                var options = { 
+                    url:        '<?php echo base_url('users/deleteMember/'); ?>'+last_clicked_id, 
+                    success:    function(data) {
+                        appendData('successMsg','Delete Successfully.');
+                    } 
+                }; 
+            
+                $(this).ajaxSubmit(options);
+                $('#rowId-'+last_clicked_id).remove();
+            }
+        });
+
+
+
+        /* ADD MEMBER */
         $('#membersForm').ajaxForm({             
             success: function (data){
                 var jData = JSON.parse(data);

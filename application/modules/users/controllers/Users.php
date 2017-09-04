@@ -63,8 +63,16 @@ class Users extends MX_Controller
     public function memberList() 
     {
         $this->activeMenu('Member List');
-        $data = ['Member List','memberList','']; 
+        $data2['memberList'] = $this->UsersModel->memberList();
+        $data = ['Member List','memberList',$data2]; 
         $this->loadAllContent($data);	
+    }
+
+    public function deleteMember() 
+    {
+        $memId = $this->uri->segment(3);
+        $data = $this->UsersModel->deleteMember($memId);        
+        echo $data;
     }
 
 
