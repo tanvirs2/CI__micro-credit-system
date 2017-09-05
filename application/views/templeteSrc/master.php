@@ -14,7 +14,7 @@
 		<meta content="Nihal IT" name="author" />
 		<?php echo $adminHeaderSrc; ?>
 		<!-- END HEAD -->
-		<body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-content-white page-md">
+		<body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-content-white page-md <?php echo sideCollaps('body');?>">
 			<div class="page-wrapper">
 				<!-- BEGIN HEADER -->
 				<?php echo $adminHeader; ?>

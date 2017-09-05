@@ -6,9 +6,9 @@
 
 				<div class="portlet-body">
 					<!-- BEGIN FORM-->
-					<form action="<?php echo base_url('users/addMember');?>" method="post" class="form-horizontal" id="membersForm" enctype="multipart/form-data">
+					<form action="<?php echo base_url('users/addMember');?>" method="post" class="form-horizontal validateForm" id="membersForm" enctype="multipart/form-data">
 						<div class="form-body">
-						
+							<br>
 							<div class="alert alert-danger display-hide" id="errorMsg"></div>
 							<div class="alert alert-success display-hide" id="successMsg"></div>
 
@@ -72,10 +72,9 @@
 								<div class="col-md-5">
 									<select class="form-control" name="acType" required>
 										<option value="">Select...</option>
-										<option value="11">Category 1</option>
-										<option value="2">Category 2</option>
-										<option value="3">Category 5</option>
-										<option value="4">Category 4</option>
+										<option value="General Savings">General Savings</option>
+										<option value="DPS">DPS</option>
+										<option value="FDR">FDR</option>
 									</select>
 								</div>
 							</div>

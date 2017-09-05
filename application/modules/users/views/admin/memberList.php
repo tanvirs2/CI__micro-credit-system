@@ -1,8 +1,9 @@
 <div class="row">
 <div class="col-md-12">
     <!-- BEGIN EXAMPLE TABLE PORTLET-->
-    <div class="alert alert-danger display-hide" id="errorMsg"></div>
-    <div class="alert alert-success display-hide" id="successMsg"></div>
+    <br>
+    <div class="alert alert-danger <?php echo !empty($_SESSION['error'])?'':'display-hide'; ?>" id="errorMsg"><?php echo !empty($_SESSION['error'])?$_SESSION['error']:''; ?></div>
+    <div class="alert alert-success <?php echo !empty($_SESSION['success'])?'':'display-hide'; ?>" id="successMsg"><?php echo !empty($_SESSION['success'])?$_SESSION['success']:''; ?></div>
     <div class="portlet light bordered">
         <div class="portlet-title">
             <div class="tools"> </div>
@@ -25,7 +26,7 @@
                 <tbody>
                 <?php foreach($memberList as $each): ?>
                     <tr id="rowId-<?php echo $each['memId']; ?>">
-                        <td><img src="<?php echo base_url('uploads/members/member').$each['memId'].'.png'; ?>" alt="" width="50px" height="50px"></td>
+                        <td><img src="<?php echo base_url('uploads/members/member').$each['memId'].'.jpg'; ?>" alt="" width="50px" height="50px"></td>
                         <td><?php echo $each['memName']; ?></td>
                         <td><?php echo $each['memPhn']; ?></td>
                         <td><?php echo $each['memPRaddrrs']; ?></td>
@@ -34,7 +35,7 @@
                         <td><?php echo $each['memFO']; ?></td>
                         <td><?php echo $each['memJnDate']; ?></td>
                         <td>
-                            <button class="btn btn-info btn-xs" >Edit</button>
+                            <a href="<?php echo base_url('users/editMember/').$each['memId'];?>" id="collapsSide" class="btn btn-info btn-xs">View/Edit</a>
                             <a href="#" class="btn btn-danger btn-xs confirmation_but" data-popout="true" data-singleton="true" data-placement="left" data-id="<?php echo $each['memId'];?>">Delete</a>
                         </td>
                     </tr>       
