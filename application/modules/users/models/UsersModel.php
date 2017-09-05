@@ -23,6 +23,20 @@ class UsersModel extends CI_Model {
         return $result;
     }
 
+    public function getMemberInfo($memId) 
+    {
+        $this->db->where('memId', $memId);
+        $result = $this->db->get($this->table)->result_array();
+        return $result;        
+    }
+
+    public function updateMember($memId, $data) 
+    {
+        $this->db->where('memId', $memId);
+        $result = $this->db->update($this->table, $data);
+        return true; 
+    }
+
     public function deleteMember($memId) 
     {
         $this->db->where('memId', $memId);

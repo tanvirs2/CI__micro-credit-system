@@ -29,8 +29,7 @@ class Users extends MX_Controller
     }
 
     public function addMember() 
-    {        
-    
+    {
         $post = $this->input->post();
         $fileInfoult = $this->validationCheck($post);
         if($fileInfoult){
@@ -46,11 +45,11 @@ class Users extends MX_Controller
             } else {                
                 $fileInfo = $this->upload->data();                
                 $insertId = $this->UsersModel->addMember($post);
-                if($fileInfoult){
+                if($fileInfo){
                     $this->renameFile($fileInfo, 'member'.$insertId); 
                     $this->jsonMsgReturn(true,'Data inserted success.');                  
                 } else {;
-                    $this->jsonMsgReturn(false,'Data insert error.');
+                    $this->jsonMsgReturn(false,'Image insert error.');
                 }                           
             }        
 
@@ -66,6 +65,68 @@ class Users extends MX_Controller
         $data2['memberList'] = $this->UsersModel->memberList();
         $data = ['Member List','memberList',$data2]; 
         $this->loadAllContent($data);	
+    }
+
+    public function editMember() 
+    {
+        $this->activeMenu('Member List');
+        $memId = $this->uri->segment(3);
+        $data2['memberInfo'] = $this->UsersModel->getMemberInfo($memId);
+        $data = ['Edit Member Information','editMember',$data2]; 
+        $this->loadAllContent($data);	
+        
+    }
+
+    public function updateMember() 
+    {       
+        $post = $this->input->post();
+        $memId = $post['memId'];
+        unset($post['memId']);
+        //dbugd($_FILES);
+
+        if(!empty($_FILES['memImg']['name'])) {     
+            $fileInfoult = $this->validationCheck($post);
+            if($fileInfoult){
+                /* LOAD FILE UPLOAD LIBRARY */
+            
+                $data = ['folder'=>'members','size'=>100,'width'=>300,'height'=>300];
+                $config = $this->fileConfig($data);    
+                $this->load->library('upload', $config);
+                /* CHECK FILE ERROR WITH GIVEN CONFIG */    
+                if ( ! $this->upload->do_upload('memImg')) {
+                    $error = array('error' => $this->upload->display_errors());
+                    $_SESSION['error'] = 'File must below 100KB and Size: W132 X H170.And Only JPG Format.';
+                    redirect(base_url('users/memberList/'.$memId),'refresh');
+                    //$this->jsonMsgReturn(false,'File must below 100KB and Size: W132 X H170.And Only JPG Format.');
+
+                } else {                
+                    $fileInfo = $this->upload->data();                
+                    $insertId = $this->UsersModel->updateMember($memId, $post);
+                    if($fileInfo){
+                        $this->renameFile($fileInfo, 'member'.$memId); 
+                        $this->session->set_flashdata('success', 'Data Update with Image Success.');
+                        redirect(base_url('users/memberList'),'refresh');
+                        //$this->jsonMsgReturn(true,'Data inserted success.');                  
+                    } else {
+                        $this->session->set_flashdata('error', 'Image insert error.');
+                        redirect(base_url('users/memberList/'.$memId),'refresh');
+                        //$this->jsonMsgReturn(false,'Image insert error.');
+                    }                           
+                }
+                                
+
+            } else {
+                $this->session->set_flashdata('error', 'Please fillup all mendatory field.');
+                redirect(base_url('users/memberList/'.$memId),'refresh');
+                //$this->jsonMsgReturn(false, 'Please fillup all mendatory field.');
+            }
+
+        } else {
+            $insertId = $this->UsersModel->updateMember($memId, $post);             
+            $this->session->set_flashdata('success', 'Data Update Success.');
+            redirect(base_url('users/memberList'),'refresh');
+            //$this->jsonMsgReturn(true,'Data inserted success.');             
+        } 
     }
 
     public function deleteMember() 
@@ -107,6 +168,7 @@ class Users extends MX_Controller
     {
         $config['upload_path']          = './uploads/'.$data['folder'];
         $config['allowed_types']        = 'jpg';
+        $config['overwrite']            = TRUE;
         $config['max_size']             = $data['size'];
         $config['max_width']            = $data['width'];
         $config['max_height']           = $data['height'];

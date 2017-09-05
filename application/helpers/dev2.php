@@ -70,7 +70,32 @@ function preLoader($id)
     return '<img src="https://www.mnn.com/static/img/m-wait.gif" class="display-hide" id="'.$id.'" width="40px" height="40px">';
 }
 
+function select($val, $val2)
+{
+    if($val == $val2){
+        echo "selected=selected";
+    } else {
+        echo '';
+    }
+}
 
+function sideCollaps($niddle)
+{
+    $ci =& get_instance();
+    $options = ['editMember'];
+    $uri = $ci->uri->segment(2);
+    $check = in_array($uri, $options);
+    if($check){
+        if($niddle == 'body'){
+            $var = 'page-sidebar-closed';
+        } else {
+            $var = 'page-sidebar-menu-closed';
+        }
+        return $var;
+    }
+
+    return '';    
+}
 
 
 ?>

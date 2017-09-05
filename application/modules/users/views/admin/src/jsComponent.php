@@ -22,7 +22,7 @@
 <script>
 
     /* VALIDATION SPAN COLOR CLASS */
-    $("#membersForm").validate({
+    $(".validateForm").validate({
         errorClass: "error-lavel",
     });
     
@@ -42,7 +42,7 @@
         $('div#'+div).text(msg);
         setTimeout(function() { 
             $('div#'+div).css({ display: "none" }); 
-        }, 3000);        
+        }, 5000);        
     }
 
 
@@ -78,6 +78,19 @@
                 } else {
                     appendData('successMsg',jData.msg);
                     $('#membersForm').resetForm();
+                }                
+            }
+        });
+
+        /* UPDATE MEMBER */
+        $('#memberEditForm').ajaxForm({             
+            success: function (data){
+                var jData = JSON.parse(data);
+                if(!jData.type) {    
+                    appendData('errorMsg',jData.msg);                    
+                } else {
+                    appendData('successMsg',jData.msg);
+                    window.location = '<?php echo base_url('users/memberList');?>';
                 }                
             }
         });
