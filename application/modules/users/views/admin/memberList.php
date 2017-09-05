@@ -1,6 +1,8 @@
 <div class="row">
 <div class="col-md-12">
     <!-- BEGIN EXAMPLE TABLE PORTLET-->
+    <div class="alert alert-danger display-hide" id="errorMsg"></div>
+    <div class="alert alert-success display-hide" id="successMsg"></div>
     <div class="portlet light bordered">
         <div class="portlet-title">
             <div class="tools"> </div>
@@ -17,19 +19,26 @@
                         <th>Acc. Type</th>
                         <th>FO</th>
                         <th>Join date</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
-                        <td>$320,800</td>
-                        <td>$320,800</td>
-                    </tr>                    
+                <?php foreach($memberList as $each): ?>
+                    <tr id="rowId-<?php echo $each['memId']; ?>">
+                        <td><img src="<?php echo base_url('uploads/members/member').$each['memId'].'.png'; ?>" alt="" width="50px" height="50px"></td>
+                        <td><?php echo $each['memName']; ?></td>
+                        <td><?php echo $each['memPhn']; ?></td>
+                        <td><?php echo $each['memPRaddrrs']; ?></td>
+                        <td><?php echo $each['memPEaddrrs']; ?></td>
+                        <td><?php echo $each['acType']; ?></td>
+                        <td><?php echo $each['memFO']; ?></td>
+                        <td><?php echo $each['memJnDate']; ?></td>
+                        <td>
+                            <button class="btn btn-info btn-xs" >Edit</button>
+                            <a href="#" class="btn btn-danger btn-xs confirmation_but" data-popout="true" data-singleton="true" data-placement="left" data-id="<?php echo $each['memId'];?>">Delete</a>
+                        </td>
+                    </tr>       
+                <?php endforeach; ?>
                 </tbody>
             </table>
         </div>

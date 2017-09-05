@@ -50,27 +50,30 @@ class DbAutoload {
             $this->ci->load->view('systemupdatemessages/systemUpdateSuccess');                       
                        
         } else {
-            /* STOP SCRIPT WHEN NEED UPDATE */
-            /* dbTables ALL TABLE ATTRIBUTES NAME AND TYPES */
-            foreach ($fileContents as $k => $value) 
-            {            
-                $fileAttribute = explode(',',$value[1]); 
-                $tableAtt = $this->ci->db->field_data($value[0]); 
-                $dbAttribute = [];
-                foreach($tableAtt as $key => $each) {
-                    $dbAttribute[] = $this->returnColNameType($each);  
-                } 
-                $attributeDiff[$k] = array_diff($dbAttribute, $fileAttribute); 
-                if( empty($attributeDiff[$k]) ){
-                    $attributeDiff[$k] = array_diff($fileAttribute, $dbAttribute);
-                }        
-            } 
-            //dbugd($attributeDiff);
-            $checkAttOrNameChange = array_filter($attributeDiff);
-
-            if(!empty($tableDifferent) || !empty($checkAttOrNameChange)) 
+            /* STOP SCRIPT WHEN NEED UPDATE */           
+            // dbugd($attributeDiff);
+            if(!empty($tableDifferent)) 
             {   
                 $this->ci->load->view('systemupdatemessages/systemUpdateNeed');  
+            } else {
+                 /* dbTables ALL TABLE ATTRIBUTES NAME AND TYPES */
+                foreach ($fileContents as $k => $value) 
+                {            
+                    $fileAttribute = explode(',',$value[1]); 
+                    $tableAtt = $this->ci->db->field_data($value[0]); 
+                    $dbAttribute = [];
+                    foreach($tableAtt as $key => $each) {
+                        $dbAttribute[] = $this->returnColNameType($each);  
+                    } 
+                    $attributeDiff[$k] = array_diff($dbAttribute, $fileAttribute); 
+                    if( empty($attributeDiff[$k]) ){
+                        $attributeDiff[$k] = array_diff($fileAttribute, $dbAttribute);
+                    }        
+                }               
+                $checkAttOrNameChange = array_filter($attributeDiff);
+                if(!empty($checkAttOrNameChange)){
+                    $this->ci->load->view('systemupdatemessages/systemUpdateNeed');  
+                }
             }
             
         }      
