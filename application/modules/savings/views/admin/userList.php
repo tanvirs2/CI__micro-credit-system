@@ -50,6 +50,10 @@
                                             <a href="<?php echo base_url('savings/savingsFormAjax/'.$user->memId);?>" data-target="#ajaxModal" data-toggle="modal"><i class="icon-docs"></i> Deposit </a>
                                         </li>
                                         <li>
+                                            <a class="clsCenterFrJs" href="<?php echo base_url('savings/userOverView/'.$user->memId);?>" data-target="#ajaxModal2" data-toggle="modal">
+                                                <i class="icon-home"></i> Deposit Overview </a>
+                                        </li>
+<li>
                                             <a href="javascript:;">
                                                 <i class="icon-tag"></i> New Comment </a>
                                         </li>
@@ -111,8 +115,9 @@
                 </div>
             </div>
         </div>
+
         <div class="modal fade" id="ajaxModal2" role="basic" aria-hidden="true">
-            <div style="margin-right: 0" class="modal-dialog">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>

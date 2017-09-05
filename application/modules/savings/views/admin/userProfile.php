@@ -44,7 +44,7 @@
             <div class="profile-usermenu">
                 <ul class="nav">
                     <li class="active">
-                        <a href="<?php echo base_url('savings/userOverView/'.$memId);?>" data-target="#ajaxModal2" data-toggle="modal">
+                        <a class="clsRightFrJs" href="<?php echo base_url('savings/userOverView/'.$memId);?>" data-target="#ajaxModal2" data-toggle="modal">
                             <i class="icon-home"></i> Overview </a>
                     </li>
                     <li>

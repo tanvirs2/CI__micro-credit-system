@@ -28,6 +28,15 @@ class SavingsModel extends CI_Model {
         return $this->db->get_where('savings', array('memberId' => $memId))->result();
     }
 
+    public function deleteSaving($savingId)
+    {
+        $this->db->delete('savings', array('id' => $savingId));
+    }
+
+    public function updateSavingsData($id, $postData)
+    {
+        $this->db->update('savings', $postData, array('id' => $id));
+    }
 
     
 }

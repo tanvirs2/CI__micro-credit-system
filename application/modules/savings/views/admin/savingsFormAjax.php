@@ -13,9 +13,7 @@
         font-weight: 800;
         margin-bottom: 7px;
     }
-    .sweet-alert {
-        z-index: 99999;
-    }
+
 </style>
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
@@ -44,7 +42,7 @@
             <div class="profile-usermenu">
                 <ul class="nav">
                     <li class="active">
-                        <a href="<?php echo base_url('savings/userOverView/'.$memId);?>" data-target="#ajaxModal2" data-toggle="modal">
+                        <a class="clsRightFrJs" href="<?php echo base_url('savings/userOverView/'.$memId);?>" data-target="#ajaxModal2" data-toggle="modal">
                             <i class="icon-home"></i> Overview </a>
                     </li>
                     <li>
@@ -78,15 +76,15 @@
                     <input type="hidden" name="memberId" value="<?php echo $memId ?>">
 
                     <div class="form-body">
-                        <div class="form-group form-md-line-input form-md-floating-label has-success date date-picker"
-                             data-date-format="yyyy-mm-dd" data-date-viewmode="years">
-                            <input name="depositDate" type="text" class="form-control" id="form_control_1" readonly>
+                        <div class="form-group form-md-line-input form-md-floating-label has-success">
+                            <input name="depositDate" type="text" class="date date-picker form-control"
+                                   data-date-format="yyyy-mm-dd" data-date-viewmode="years" id="form_control_0" readonly>
                             <span class="input-group-btn">
                                 <button style="display: none" class="btn default" type="button">
                                     <i class="fa fa-calendar"></i>
                                 </button>
                             </span>
-                            <label for="form_control_1"></label>
+                            <label for="form_control_0">Deposit Date</label>
                             <span class="help-block">e.g: 2017-12-19</span>
                         </div>
                         <div class="form-group form-md-line-input form-md-floating-label">

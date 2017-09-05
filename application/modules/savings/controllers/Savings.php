@@ -63,6 +63,21 @@ class Savings extends MX_Controller
         $this->load->view('admin/userProfile', $data);
     }
 
+    public function deleteSaving($savingId)
+    {
+        $this->SavingsModel->deleteSaving($savingId);
+    }
+
+    public function updateSavingsData()
+    {
+        $postData = $this->input->post(NULL, FALSE);
+        //pde($postData);
+        $id = $postData['id'];
+        unset($postData['id']);
+        $this->SavingsModel->updateSavingsData($id, $postData);
+
+    }
+
     public function slctSum()
     {
         /*$this->db->select_sum('dpAmount');
