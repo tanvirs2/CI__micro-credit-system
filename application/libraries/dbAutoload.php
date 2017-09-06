@@ -33,6 +33,8 @@ class DbAutoload {
 
         /* IF UPDATE URL VALID */
         $validUri = $this->ci->uri->segment(2);        
+                
+        //dbugd($uriTable);
         if ($validUri == 'system-update')
         {
             //$output = array_slice($fileContents[0], 2);
