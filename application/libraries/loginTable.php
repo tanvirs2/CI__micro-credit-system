@@ -10,6 +10,13 @@ class LoginTable {
         /* LOAD INSTANCE AND DBFOREGE */
         $this->ci =& get_instance();    
         $this->ci->load->dbforge();
+        
+        /* DROP TABLE FOR SEED AGAING THIS TABLE */
+        $uriTable = $this->ci->uri->segment(3);
+        if(!empty($uriTable))
+        {
+            $this->down($uriTable);
+        }
 
         /* LIST OF ALL DB TABLES */
         $dbTables = $this->ci->db->list_tables(); 
@@ -45,15 +52,8 @@ class LoginTable {
                 $eachValue[] = $eachV[0];
                 /* IF ANY TABLE TYPE NOT FOUND */
                 if(empty($eachV[1]))
-                {
-                    echo '<div style="border: 2px solid #383337; width: 700px; margin: 100px auto; padding: 10px; line-height: 0.7; text-align: center;">';
-                    echo '<img src="http://www.nihalit.com/src/home/images/logo.png" />';
-                    echo '<h1 style="color: #0070C6;">Error</h1>';
-                    echo '<h1 style="color: #0070C6;">Please Check 
-                    <span style="color: red;">'.$table.'</span>
-                    Table All Attributes.  </h1>';
-                    echo '</div>';
-                    die();
+                {                   
+                    $this->wrongAttribute($table);                    
                 }
                 if($eachV[0] !== !empty($tableAtt[$k]))
                 {
@@ -77,17 +77,7 @@ class LoginTable {
                 /* SEEDS DATA TO TABLE */
                 if(!empty($seeds))
                 {
-                    $replate = [" ","'","(","),",");"];
-                    foreach($seeds as $seedKey=>$eachSeedRow)
-                    {
-                        $exploadSeedRow[$seedKey] = explode(',',str_replace($replate,'',$eachSeedRow));
-                        foreach($exploadSeedRow[$seedKey] as $exploadSeedRowKey=>$exploadSeedRowValue)
-                        {
-                            $eachRowValue[$eachValue[$exploadSeedRowKey]] = $exploadSeedRowValue; 
-                            $newExploadSeedRow[$seedKey][$eachValue[$exploadSeedRowKey]] = $eachRowValue[$eachValue[$exploadSeedRowKey]];
-                        }                  
-                    }
-                    $this->ci->db->insert_batch($table, $newExploadSeedRow);
+                    $this->seedTable($seeds,$eachValue,$table);
                 }
             } else {
                 /* WHEN TABLE FOUND */         
@@ -147,6 +137,38 @@ class LoginTable {
                 }             
             } 
         endforeach;             
+    }
+
+
+    /* ================= FUNCTIONS AREA ================== */
+
+    /* EXIT SCRIPT WHEN FOUND WRONG ATTRIBUTE IN FILE */
+    public function wrongAttribute($table) 
+    {
+        echo '<div style="border: 2px solid #383337; width: 700px; margin: 100px auto; padding: 10px; line-height: 0.7; text-align: center;">';
+        echo '<img src="http://www.nihalit.com/src/home/images/logo.png" />';
+        echo '<h1 style="color: #0070C6;">Error</h1>';
+        echo '<h1 style="color: #0070C6;">Please Check 
+        <span style="color: red;">'.$table.'</span>
+        Table All Attributes.  </h1>';
+        echo '</div>';
+        die();
+    }
+
+    /* SEED TABLE */
+    public function seedTable($seeds,$eachValue,$table) 
+    {
+        $replace = [" ","'","(","),",");"];
+        foreach($seeds as $seedKey=>$eachSeedRow)
+        {
+            $exploadSeedRow[$seedKey] = explode(',',str_replace($replace,'',$eachSeedRow));
+            foreach($exploadSeedRow[$seedKey] as $exploadSeedRowKey=>$exploadSeedRowValue)
+            {
+                $eachRowValue[$eachValue[$exploadSeedRowKey]] = $exploadSeedRowValue; 
+                $newExploadSeedRow[$seedKey][$eachValue[$exploadSeedRowKey]] = $eachRowValue[$eachValue[$exploadSeedRowKey]];
+            }                  
+        }
+        $this->ci->db->insert_batch($table, $newExploadSeedRow);
     }
 
     /* CREATE NEW TABLE AND ATTBUTES */
