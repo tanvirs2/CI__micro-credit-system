@@ -1,3 +1,6 @@
+
+
+
 <style>
     .profile-usertitle-name {
         color: #5a7391;
@@ -15,8 +18,19 @@
     }
 
 </style>
+<div class="portlet light portlet-fit">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-bubble font-dark"></i>
+            <span class="caption-subject font-dark bold uppercase">User Profile</span>
+        </div>
+    </div>
+</div>
+
+
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-12 ">
+        <div class="col-md-4">
         <div class="portlet light profile-sidebar-portlet ">
             <!-- SIDEBAR USERPIC -->
             <div class="profile-userpic">
@@ -57,12 +71,9 @@
             </div>
             <!-- END MENU -->
         </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12 ">
+        </div>
         <!-- BEGIN SAMPLE FORM PORTLET-->
+        <div class="col-md-8">
         <div class="portlet light bordered">
             <div class="portlet-title">
                 <div class="caption font-green">
@@ -96,10 +107,11 @@
                     </div>
                     <div class="form-actions noborder">
                         <button type="submit" class="btn blue">Submit</button>
-                        <button type="button" class="btn default">Cancel</button>
+                        <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
                     </div>
                 </form>
             </div>
+        </div>
         </div>
     </div>
 </div>
@@ -128,7 +140,13 @@ type="text/javascript"></script>
     $(document).ready(function() {
         // bind 'myForm' and provide a simple callback function
         $('[action="<?php echo base_url('savings/savingsData'); ?>"]').ajaxForm(function() {
-            swal("Good job!", "Save update", "success");
+            swal({
+                title: "Good job!",
+                text: "Save update",
+                type: "success"
+            }, function () {
+                $("#ajaxModal").modal('hide');
+            });
         });
 
     });

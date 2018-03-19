@@ -10,7 +10,6 @@
     <div class="portlet-body">
         <div class="table-scrollable">
 
-
             <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" id="sample_1" role="grid" aria-describedby="sample_1_info">
                 <thead>
                 <thead>

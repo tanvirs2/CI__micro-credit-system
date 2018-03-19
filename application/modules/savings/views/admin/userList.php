@@ -53,7 +53,7 @@
                                             <a class="clsCenterFrJs" href="<?php echo base_url('savings/userOverView/'.$user->memId);?>" data-target="#ajaxModal2" data-toggle="modal">
                                                 <i class="icon-home"></i> Deposit Overview </a>
                                         </li>
-<li>
+                                        <li>
                                             <a href="javascript:;">
                                                 <i class="icon-tag"></i> New Comment </a>
                                         </li>
@@ -80,7 +80,7 @@
         </div>
 
         <div class="modal fade" id="ajaxModal" role="basic" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -93,12 +93,13 @@
                     <div class="modal-footer">
                         <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                         <button type="button" class="btn green">Save changes</button>
+
                     </div>
                 </div>
             </div>
         </div>
         <div class="modal fade" id="ajaxModalProfile" role="basic" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
